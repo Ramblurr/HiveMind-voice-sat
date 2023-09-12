@@ -15,7 +15,7 @@ from hivemind_voice_satellite import VoiceClient
 @click.option("--siteid", help="location identifier for message.context", type=str, default="unknown")
 def connect(host, key, password, port, selfsigned, siteid):
     init_service_logger("HiveMind-voice-sat")
-    
+
     if not host.startswith("ws"):
         LOG.error("Invalid host, please specify a protocol")
         LOG.error(f"ws://{host} or wss://{host}")
@@ -42,6 +42,7 @@ def connect(host, key, password, port, selfsigned, siteid):
 
     try:
         from ovos_PHAL.service import PHAL
+        LOG.info(f"XXX VoiceSat initializing PHAL with bus={bus}")
         phal = PHAL(bus=bus)
         phal.start()
     except ImportError:
